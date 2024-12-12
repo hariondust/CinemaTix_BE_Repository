@@ -18,6 +18,9 @@ namespace CinemaTix.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -94,7 +97,7 @@ namespace CinemaTix.Migrations
                     b.Property<Guid>("ShowId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ShowsId")
+                    b.Property<Guid?>("ShowsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("StatusRecord")
@@ -109,7 +112,7 @@ namespace CinemaTix.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UsersId")
+                    b.Property<Guid?>("UsersId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -142,7 +145,7 @@ namespace CinemaTix.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("OrdersId")
+                    b.Property<Guid?>("OrdersId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Rating")
@@ -267,15 +270,11 @@ namespace CinemaTix.Migrations
                 {
                     b.HasOne("CinemaTix.Models.Shows", "Shows")
                         .WithMany()
-                        .HasForeignKey("ShowsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ShowsId");
 
                     b.HasOne("CinemaTix.Models.Users", "Users")
                         .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsersId");
 
                     b.Navigation("Shows");
 
@@ -286,9 +285,7 @@ namespace CinemaTix.Migrations
                 {
                     b.HasOne("CinemaTix.Models.Orders", "Orders")
                         .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrdersId");
 
                     b.Navigation("Orders");
                 });

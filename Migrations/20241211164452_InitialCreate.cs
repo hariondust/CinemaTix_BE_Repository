@@ -93,8 +93,8 @@ namespace CinemaTix.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ShowId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ShowsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ShowsId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -110,14 +110,12 @@ namespace CinemaTix.Migrations
                         name: "FK_Orders_Shows_ShowsId",
                         column: x => x.ShowsId,
                         principalTable: "Shows",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_Users_UsersId",
                         column: x => x.UsersId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -128,7 +126,7 @@ namespace CinemaTix.Migrations
                     OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Rating = table.Column<double>(type: "float", nullable: false),
                     Review = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrdersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrdersId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -144,8 +142,7 @@ namespace CinemaTix.Migrations
                         name: "FK_Reviews_Orders_OrdersId",
                         column: x => x.OrdersId,
                         principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

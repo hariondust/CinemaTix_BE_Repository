@@ -2,7 +2,6 @@
 {
     public class Movies : BaseProperty
     {
-        public Guid Id { get; set; }
         public required string Title { get; set; }
         public string? Synopsis { get; set; }
         public int Duration { get; set; } // in minutes
