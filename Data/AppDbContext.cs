@@ -24,6 +24,69 @@ namespace CinemaTix.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Movies>(entity =>
+            {
+                entity.Property(m => m.CreatedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.UpdatedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.DeletedDate)
+                .HasColumnType("timestamp");
+            });
+
+            modelBuilder.Entity<Users>(entity =>
+            {
+                entity.Property(m => m.CreatedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.UpdatedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.DeletedDate)
+                .HasColumnType("timestamp");
+            });
+
+            modelBuilder.Entity<Orders>(entity =>
+            {
+                entity.Property(m => m.CreatedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.UpdatedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.DeletedDate)
+                .HasColumnType("timestamp");
+            });
+
+            modelBuilder.Entity<Shows>(entity =>
+            {
+                entity.Property(m => m.CreatedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.UpdatedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.DeletedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.Schedule)
+                .HasColumnType("timestamp");
+            });
+
+            modelBuilder.Entity<Reviews>(entity =>
+            {
+                entity.Property(m => m.CreatedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.UpdatedDate)
+                .HasColumnType("timestamp");
+
+                entity.Property(m => m.DeletedDate)
+                .HasColumnType("timestamp");
+            });
         }
     }
 }

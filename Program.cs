@@ -1,6 +1,8 @@
 using CinemaTix.Data;
 using CinemaTix.Data.Seeds;
+using CinemaTix.Interfaces;
 using CinemaTix.Middleware;
+using CinemaTix.Repositories;
 using CinemaTix.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -12,12 +14,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
             .UseLazyLoadingProxies()
 );
 
-// Register JWT Service
+// Register Repository
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IShowRepository, ShowRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+
+// Register Service
 builder.Services.AddSingleton<JWTServices>();
+builder.Services.AddScoped<IMovieService, MovieServices>();
+builder.Services.AddScoped<IUserService, UserServices>();
+builder.Services.AddScoped<IOrderService, OrderServices>();
+builder.Services.AddScoped<IShowService, ShowServices>();
+builder.Services.AddScoped<IReviewService, ReviewServices>();
 
 // Configure Redis cache
 builder.Services.AddStackExchangeRedisCache(options =>
@@ -47,6 +61,7 @@ builder.Services.AddAuthentication("Bearer")
     });
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
