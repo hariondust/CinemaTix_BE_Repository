@@ -1,4 +1,5 @@
 ﻿using CinemaTix.Models;
+using CinemaTix.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinemaTix.Data

@@ -30,7 +30,7 @@ namespace CinemaTix.Data.Seeds
 
             foreach (var user in users)
             {
-                user.ProcessData(EnumStatusRecord.Insert, Constants.AdminUserId);
+                user.ProcessData(Constants.StatusRecordInsert, Constants.AdminUserId);
             }
 
             context.Users.AddRange(users);

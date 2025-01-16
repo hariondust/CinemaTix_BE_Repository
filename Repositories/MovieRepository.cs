@@ -15,12 +15,11 @@ namespace CinemaTix.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Movies>> GetAllAsync()
-        {
-            return await _context.Movies.Where(x => x.StatusRecord != EnumStatusRecord.Delete).AsNoTracking().ToListAsync();
-        }
+        public async Task<IEnumerable<Movies>> GetAllAsync() => await _context.Movies.Where(x => x.StatusRecord != Constants.StatusRecordDelete).AsNoTracking().ToListAsync();
 
-        public async Task<Movies> GetByIdAsync(Guid Id) => await _context.Movies.FindAsync(Id);
+        public async Task<Movies?> GetByIdAsync(Guid Id) => await _context.Movies.FindAsync(Id);
+
+        public async Task<Movies?> GetByTitleAsync(string Title) => await _context.Movies.Where(x => x.Title == Title && x.StatusRecord != Constants.StatusRecordDelete).AsNoTracking().FirstOrDefaultAsync();
 
         public async Task CreateAsync(Movies Movie)
         {
@@ -34,15 +33,15 @@ namespace CinemaTix.Repositories
             await _context.SaveChangesAsync();
         }
 
-        // We don't use this because we use Soft Delete
-        public async Task DeleteByIdAsync(Guid Id)
+        // We don't use this as we're using soft delete
+        public async Task DeleteAsync(Guid Id)
         {
-            var Movie = await _context.Movies.FindAsync(Id);
-            if (Movie != null)
+            var movie = await _context.Movies.FindAsync(Id);
+            if (movie != null)
             {
-                _context.Movies.Remove(Movie);
-                await _context.SaveChangesAsync();
+                _context.Movies.Remove(movie);
             }
+            await _context.SaveChangesAsync();
         }
     }
 }

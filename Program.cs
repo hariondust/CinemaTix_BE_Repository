@@ -32,6 +32,8 @@ builder.Services.AddScoped<IUserService, UserServices>();
 builder.Services.AddScoped<IOrderService, OrderServices>();
 builder.Services.AddScoped<IShowService, ShowServices>();
 builder.Services.AddScoped<IReviewService, ReviewServices>();
+builder.Services.AddScoped<IUserRoleService, UserRoleService>();
+
 
 // Configure Redis cache
 builder.Services.AddStackExchangeRedisCache(options =>
@@ -56,7 +58,7 @@ builder.Services.AddAuthentication("Bearer")
             ValidateIssuerSigningKey = true,
             ValidIssuer = issuer,
             ValidAudience = audience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(issuerKey))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(issuerKey!))
         };
     });
 

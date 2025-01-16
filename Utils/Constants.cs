@@ -17,5 +17,10 @@
         public static readonly Guid MovieId9 = new Guid("55EA5EAD-08CA-409B-8AC2-8617851EF9B7");
         public static readonly Guid MovieId10 = new Guid("A6DC5874-1658-40C1-959D-A28A3D9A14E7");
         public static readonly Guid MovieId11 = new Guid("5E49BF1F-129C-4000-8292-3E77F9BC9EE2");
+
+        public static readonly char StatusRecordDelete = 'D';
+        public static readonly char StatusRecordInsert = 'I';
+        public static readonly char StatusRecordUpdate = 'U';
+
     }
 }

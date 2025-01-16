@@ -28,7 +28,7 @@ namespace CinemaTix.Data.Seeds
 
             foreach (var movie in movies)
             {
-                movie.ProcessData(EnumStatusRecord.Insert, Constants.AdminUserId);
+                movie.ProcessData(Constants.StatusRecordInsert, Constants.AdminUserId);
             };
 
             context.Movies.AddRange(movies);

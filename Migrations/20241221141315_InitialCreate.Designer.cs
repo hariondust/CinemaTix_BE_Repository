@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CinemaTix.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241218183957_InitialCreate")]
+    [Migration("20241221141315_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -55,8 +55,8 @@ namespace CinemaTix.Migrations
                     b.Property<double>("Rating")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("StatusRecord")
-                        .HasColumnType("integer");
+                    b.Property<char>("StatusRecord")
+                        .HasColumnType("character(1)");
 
                     b.Property<string>("Synopsis")
                         .HasColumnType("text");
@@ -103,8 +103,8 @@ namespace CinemaTix.Migrations
                     b.Property<Guid?>("ShowsId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("StatusRecord")
-                        .HasColumnType("integer");
+                    b.Property<char>("StatusRecord")
+                        .HasColumnType("character(1)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");
@@ -157,8 +157,8 @@ namespace CinemaTix.Migrations
                     b.Property<string>("Review")
                         .HasColumnType("text");
 
-                    b.Property<int>("StatusRecord")
-                        .HasColumnType("integer");
+                    b.Property<char>("StatusRecord")
+                        .HasColumnType("character(1)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");
@@ -203,8 +203,8 @@ namespace CinemaTix.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
-                    b.Property<int>("StatusRecord")
-                        .HasColumnType("integer");
+                    b.Property<char>("StatusRecord")
+                        .HasColumnType("character(1)");
 
                     b.Property<int>("TotalSeat")
                         .HasColumnType("integer");
@@ -251,8 +251,8 @@ namespace CinemaTix.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("integer");
 
-                    b.Property<int>("StatusRecord")
-                        .HasColumnType("integer");
+                    b.Property<char>("StatusRecord")
+                        .HasColumnType("character(1)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid");

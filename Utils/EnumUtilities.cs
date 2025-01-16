@@ -1,12 +1,5 @@
 ﻿namespace CinemaTix.Utils
 {
-    public enum EnumStatusRecord
-    {
-        Insert = 'I',
-        Update = 'U',
-        Delete = 'D',
-    }
-
     public enum EnumUserRole
     {
         Admin = 1,

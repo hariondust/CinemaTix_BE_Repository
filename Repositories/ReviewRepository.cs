@@ -17,10 +17,10 @@ namespace CinemaTix.Repositories
 
         public async Task<IEnumerable<Reviews>> GetAllAsync()
         {
-            return await _context.Reviews.Where(x => x.StatusRecord != EnumStatusRecord.Delete).AsNoTracking().ToListAsync();
+            return await _context.Reviews.Where(x => x.StatusRecord != Constants.StatusRecordDelete).AsNoTracking().ToListAsync();
         }
 
-        public async Task<Reviews> GetByIdAsync(Guid Id) => await _context.Reviews.FindAsync(Id);
+        public async Task<Reviews?> GetByIdAsync(Guid Id) => await _context.Reviews.FindAsync(Id);
 
         public async Task CreateAsync(Reviews Review)
         {

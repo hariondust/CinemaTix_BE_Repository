@@ -13,9 +13,9 @@ namespace CinemaTix.Services
 
         public JWTServices(IConfiguration configuration)
         {
-            _secretKey = configuration["JWTSettings:SecretKey"];
-            _issuer = configuration["JWTSettings:Issuer"];
-            _audience = configuration["JWTSettings:Audience"];
+            _secretKey = configuration["JWTSettings:SecretKey"]!;
+            _issuer = configuration["JWTSettings:Issuer"]!;
+            _audience = configuration["JWTSettings:Audience"]!;
         }
 
         public string GenerateToken(Guid userId, string username) 

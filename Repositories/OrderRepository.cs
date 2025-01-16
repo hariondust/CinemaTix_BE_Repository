@@ -17,7 +17,7 @@ namespace CinemaTix.Repositories
 
         public async Task<IEnumerable<Orders>> GetAllAsync()
         {
-            return await _context.Orders.Where(x => x.StatusRecord != EnumStatusRecord.Delete).AsNoTracking().ToListAsync();
+            return await _context.Orders.Where(x => x.StatusRecord != Constants.StatusRecordDelete).AsNoTracking().ToListAsync();
         }
 
         public async Task<Orders> GetByIdAsync(Guid Id) => await _context.Orders.FindAsync(Id);

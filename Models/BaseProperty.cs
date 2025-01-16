@@ -11,32 +11,31 @@ namespace CinemaTix.Models
         public DateTime? UpdatedDate { get; set; }
         public Guid DeletedBy { get; set; } = Guid.Empty;
         public DateTime? DeletedDate { get; set; }
-        public EnumStatusRecord StatusRecord { get; set; } = EnumStatusRecord.Insert;
+        public char StatusRecord { get; set; } = Constants.StatusRecordInsert;
 
-        public void ProcessData (EnumStatusRecord statusRecord, Guid? UsersId = null)
+        public void ProcessData (char statusRecord, Guid? UsersId = null)
         {
-            switch (statusRecord)
+            if (statusRecord == Constants.StatusRecordInsert)
             {
-                case EnumStatusRecord.Insert:
-                    CreatedDate = DateTime.Now;
-                    CreatedBy = UsersId ?? Constants.AdminUserId;
-                    StatusRecord = EnumStatusRecord.Insert;
-                    break;
-
-                case EnumStatusRecord.Delete:
-                    DeletedDate = DateTime.Now;
-                    DeletedBy = UsersId ?? Constants.AdminUserId;
-                    StatusRecord = EnumStatusRecord.Delete;
-                    break;
-
-                case EnumStatusRecord.Update:
-                    UpdatedDate = DateTime.Now;
-                    UpdatedBy = UsersId ?? Constants.AdminUserId;
-                    StatusRecord = EnumStatusRecord.Update;
-                    break;
-
-                default:
-                    throw new ArgumentException("Invalid Status Record");
+                CreatedDate = DateTime.Now;
+                CreatedBy = UsersId ?? Constants.AdminUserId;
+                StatusRecord = Constants.StatusRecordInsert;
+            } 
+            else if (statusRecord == Constants.StatusRecordUpdate)
+            {
+                UpdatedDate = DateTime.Now;
+                UpdatedBy = UsersId ?? Constants.AdminUserId;
+                StatusRecord = Constants.StatusRecordUpdate;
+            } 
+            else if (statusRecord == Constants.StatusRecordDelete)
+            {
+                DeletedDate = DateTime.Now;
+                DeletedBy = UsersId ?? Constants.AdminUserId;
+                StatusRecord = Constants.StatusRecordDelete;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid Status Record");
             }
         }
     }

@@ -27,7 +27,7 @@ namespace CinemaTix.Migrations
                     UpdatedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    StatusRecord = table.Column<int>(type: "integer", nullable: false)
+                    StatusRecord = table.Column<char>(type: "character(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,7 +49,7 @@ namespace CinemaTix.Migrations
                     UpdatedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    StatusRecord = table.Column<int>(type: "integer", nullable: false)
+                    StatusRecord = table.Column<char>(type: "character(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,7 +72,7 @@ namespace CinemaTix.Migrations
                     UpdatedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    StatusRecord = table.Column<int>(type: "integer", nullable: false)
+                    StatusRecord = table.Column<char>(type: "character(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -101,7 +101,7 @@ namespace CinemaTix.Migrations
                     UpdatedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    StatusRecord = table.Column<int>(type: "integer", nullable: false)
+                    StatusRecord = table.Column<char>(type: "character(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -133,7 +133,7 @@ namespace CinemaTix.Migrations
                     UpdatedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uuid", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    StatusRecord = table.Column<int>(type: "integer", nullable: false)
+                    StatusRecord = table.Column<char>(type: "character(1)", nullable: false)
                 },
                 constraints: table =>
                 {

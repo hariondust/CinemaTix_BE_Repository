@@ -1,5 +1,6 @@
 ﻿using CinemaTix.Data;
 using CinemaTix.DTOs;
+using CinemaTix.Interfaces;
 using CinemaTix.Models;
 using CinemaTix.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -16,14 +17,14 @@ namespace CinemaTix.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : BaseController
     {
         private readonly AppDbContext _context;
         private readonly JWTServices _jwtServices;
         private readonly IDistributedCache _cache;
-        private readonly ILogger<AuthController> _logger;
+        private new readonly ILogger<AuthController> _logger;
 
-        public AuthController(AppDbContext context, JWTServices jwtServices, IDistributedCache cache, ILogger<AuthController> logger)
+        public AuthController(AppDbContext context, JWTServices jwtServices, IDistributedCache cache, ILogger<AuthController> logger, IUserRoleService userRoleService) : base(logger, userRoleService)
         {
             _context = context;
             _jwtServices = jwtServices;
@@ -81,21 +82,14 @@ namespace CinemaTix.Controllers
         {
             _logger.LogInformation("Logout process has started.");
 
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim == null)
-            {
-                _logger.LogWarning("Logout failed: User ID not found in the token.");
-                return Unauthorized("Invalid token.");
-            }
-
-            var userId = userIdClaim.Value;
-
             try
             {
-                var redisKey = $"CinemaTixuser:{userId}:session";
+                (Guid userId, bool isAdmin) userLoginData = await CheckUserLoginData();
+
+                var redisKey = $"CinemaTixuser:{userLoginData.userId}:session";
                 await _cache.RemoveAsync(redisKey);
              
-                _logger.LogInformation("Logout successful for user: {UserId}", userId);
+                _logger.LogInformation("Logout successful for user: {UserId}", userLoginData.userId);
                 return Ok("Successfully logged out.");
             }
             catch (RedisConnectionException ex)
@@ -105,8 +99,8 @@ namespace CinemaTix.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred during the logout process.");
-                return StatusCode(500, "An error occurred during the logout process.");
+                _logger.LogError(ex, "An error has occurred during the logout process.");
+                return StatusCode(500, "An error has occurred during the logout process.");
             }
         }
 
